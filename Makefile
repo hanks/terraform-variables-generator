@@ -1,15 +1,21 @@
 VERSION = 1.0.0
 CUR_DIR = $(shell pwd)
 WORKSPACE = /go/src/github.com/hanks/terraform-variables-generator
-DEV_IMAGE = tfvargen-dev
+DEV_IMAGE = hanks/tfvargen-dev:1.0.0
 OS = $(shell uname -s | tr '[:upper:]' '[:lower:]')
 
-.PHONY: dev build test debug install uninstall clean
+.PHONY: dev pull push build test debug install uninstall clean
 
-default: dev
+default: pull
 
 dev:
 	docker build -t $(DEV_IMAGE) .
+
+pull:
+	docker pull $(DEV_IMAGE)
+
+push:
+	docker push $(DEV_IMAGE)
 
 build: test clean
 	docker run -it --rm -v $(CUR_DIR):$(WORKSPACE) -e "CGO_ENABLED=0" -e "GOARCH=amd64" -e "GOOS=linux" $(DEV_IMAGE) go build -o ./dist/bin/tfvargen_linux_amd64_$(VERSION) main.go

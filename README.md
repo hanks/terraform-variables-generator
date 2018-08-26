@@ -180,7 +180,8 @@ variable "tags" {
 
 ## Development
 
-* `make dev`, build docker image used in dev, should be run before other commands
+* `make pull`, pull `tfvargen-dev` docker image for development, should be run before other commands
+* `make dev`, build docker image used in dev
 * `make test`, run unit test, coverage test, static analytics
 * `make build`, cross compile binaries, and put into `dist/bin` directory
 * `make debug`, use `dlv` to do the `gdb-style` debug
