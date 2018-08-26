@@ -1,0 +1,19 @@
+vars:
+  - public_subnets:
+      type: list
+      description: subnets for public
+      default: |
+        ["sub1", "sub2"]
+  - tags:
+      type: map
+      default: |
+        {
+          Name = "Terraform"
+        }
+  - cidrs:
+      type: list
+      default: |
+        ["10.0.0.0/16", "10.1.0.0/16"]
+  - t1-var2:
+      description: var for t1
+      type: string

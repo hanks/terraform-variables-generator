@@ -1,0 +1,22 @@
+//Mock Terraform Configuration File
+resource "aws_eip" "nat" {
+  vpc   = true
+  count = "${length(var.public_subnets)}"
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
+  count         = "${length(var.public_subnets)}"
+  tags          = "${var.tags}"
+}
+
+data "template_file" "template1" {
+  template = "${file("${path.module}/template1.tpl")}"
+
+  vars {
+    t1_var1 = "${var.cidrs}"
+    t1-var2 = "${var.t1-var2}"
+    t1-var3 = "${var.t1-Var3}-${var.t1-inline}"
+  }
+}
