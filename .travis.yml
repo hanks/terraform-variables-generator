@@ -3,7 +3,5 @@ services:
   - docker
 notifications:
   email: false
-before_install:
-  - make dev
 script:
   - make test

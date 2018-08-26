@@ -4,15 +4,12 @@ WORKSPACE = /go/src/github.com/hanks/terraform-variables-generator
 DEV_IMAGE = hanks/tfvargen-dev:1.0.0
 OS = $(shell uname -s | tr '[:upper:]' '[:lower:]')
 
-.PHONY: dev pull push build test debug install uninstall clean
+.PHONY: dev push build test debug install uninstall clean
 
-default: pull
+default: test
 
 dev:
 	docker build -t $(DEV_IMAGE) .
-
-pull:
-	docker pull $(DEV_IMAGE)
 
 push:
 	docker push $(DEV_IMAGE)
