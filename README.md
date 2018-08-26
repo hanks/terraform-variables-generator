@@ -81,52 +81,102 @@ vars:
 ### Example
 
 ```text
-resource "aws_vpc" "vpc" {
-  cidr_block           = "${var.cidr}"
-  enable_dns_hostnames = "${var.enable_dns_hostnames}"
-  enable_dns_support   = "${var.enable_dns_support}"
-
-  tags {
-    Name = "${var.name}"
-  }
+resource "aws_eip" "nat" {
+  vpc   = true
+  count = "${length(var.public_subnets)}"
 }
 
-resource "aws_internet_gateway" "vpc" {
-  vpc_id = "${aws_vpc.vpc.id}"
+resource "aws_nat_gateway" "nat" {
+  allocation_id = "${element(aws_eip.nat.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
+  count         = "${length(var.public_subnets)}"
+  tags          = "${var.tags}"
+}
 
-  tags {
-    Name = "${var.name}-igw"
+data "template_file" "template1" {
+  template = "${file("${path.module}/template1.tpl")}"
+
+  vars {
+    t1_var1 = "${var.cidrs}"
+    t1-var2 = "${var.t1-var2}"
+    t1-var3 = "${var.t1-Var3}-${var.t1-inline}"
   }
 }
 ```
 
- Will generate
+Will generate:
 
- ```text
- variable "ami" {
-   description  = ""
+```text
+variable "cidrs" {}
+
+variable "public_subnets" {}
+
+variable "t1-Var3" {}
+
+variable "t1-inline" {}
+
+variable "t1-var2" {}
+
+variable "tags" {}
+```
+
+And, if you add customized conf `vars.yml`:
+
+```yaml
+vars:
+  - public_subnets:
+      type: list
+      description: subnets for public
+      default: |
+        ["sub1", "sub2"]
+  - tags:
+      type: map
+      default: |
+        {
+          Name = "Terraform"
+        }
+  - cidrs:
+      type: list
+      default: |
+        ["10.0.0.0/16", "10.1.0.0/16"]
+  - t1-var2:
+      description: var for t1
+      type: string
+```
+
+then run generator again, the result will be:
+
+```text
+variable "cidrs" {
+  type = "list"
+
+  default = ["10.0.0.0/16", "10.1.0.0/16"]
 }
 
-variable "instance_type" {
-   description  = ""
+variable "public_subnets" {
+  description = "subnets for public"
+  type        = "list"
+
+  default = ["sub1", "sub2"]
 }
 
-variable "cidr" {
-   description  = ""
+variable "t1-Var3" {}
+
+variable "t1-inline" {}
+
+variable "t1-var2" {
+  description = "var for t1"
+  type        = "string"
 }
 
-variable "enable_dns_hostnames" {
-   description  = ""
-}
+variable "tags" {
+  type = "map"
 
-variable "enable_dns_support" {
-   description  = ""
+  default = {
+    Name = "Terraform"
+  }
 }
-
-variable "name" {
-   description  = ""
-}
- ```
+```
 
 ## Development
 
