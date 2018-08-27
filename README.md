@@ -181,6 +181,7 @@ variable "tags" {
 ## Development
 
 * `make test`, run unit test, coverage test, static analytics
+* `make run`, run program to generate `variables.tf` in `tests` directory
 * `make build`, cross compile binaries, and put into `dist/bin` directory
 * `make debug`, use `dlv` to do the `gdb-style` debug
 * `make dev`, build docker image used in dev
