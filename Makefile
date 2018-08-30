@@ -1,4 +1,4 @@
-VERSION = 1.0.0
+VERSION = 1.0.1
 CUR_DIR = $(shell pwd)
 WORKSPACE = /go/src/github.com/hanks/terraform-variables-generator
 DEV_IMAGE = hanks/tfvargen-dev:1.0.0
