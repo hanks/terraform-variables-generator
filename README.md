@@ -50,7 +50,7 @@ and you can find help info by:
 tfvargen -h
 ```
 
-Also you can customized variable block with `vars.ylm` to be put into the `*.tf` directory, like
+Also you can customized variable block with `vars.yml` to be put into the `*.tf` directory, like
 
 ```text
 vars:
