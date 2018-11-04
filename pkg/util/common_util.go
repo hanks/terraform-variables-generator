@@ -10,16 +10,16 @@ import (
 // CheckError helps to abort when error happens
 func CheckError(e error) {
 	if e != nil {
-		log.Fatal(e)
+		panic(e)
 	}
 }
 
 // UserPromt helps to ask user to overwrite existed 'variables.tf' or not
-func UserPromt(dstFile string) {
+func UserPromt(scanln func(a ...interface{}) (int, error), dstFile string) {
 	var response string
 	log.Warnf("File %q already exists, type yes if you want overwrite it", dstFile)
 	fmt.Print("-> ")
-	_, err := fmt.Scanln(&response)
+	_, err := scanln(&response)
 	CheckError(err)
 	if response != "yes" {
 		os.Exit(0)

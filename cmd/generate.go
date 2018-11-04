@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"sync"
 
 	"github.com/hashicorp/hcl/hcl/printer"
@@ -24,10 +25,10 @@ func Generate(dir string, varConfName string) {
 
 func gatherVars(dir string, varConfName string) (*parser.TerraformVars, string) {
 	if util.FileExists(c.DstFile) {
-		util.UserPromt(c.DstFile)
+		util.UserPromt(fmt.Scanln, c.DstFile)
 	}
 
-	tfFiles, dirPath, err := util.GetAllFiles(dir, c.TFFileExt)
+	tfFiles, dirPath, err := util.GetAllFiles(filepath.Glob, dir, c.TFFileExt)
 	if len(tfFiles) == 0 {
 		log.Warn("No terraform files to proceed, exiting")
 		os.Exit(0)

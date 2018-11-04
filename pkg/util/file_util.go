@@ -2,13 +2,12 @@ package util
 
 import (
 	"os"
-	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
 )
 
 // GetAllFiles helps to get all blob type of files with specified extension in specified directory
-func GetAllFiles(dir string, ext string) ([]string, string, error) {
+func GetAllFiles(glob func(s string) ([]string, error), dir string, ext string) ([]string, string, error) {
 	var err error
 	var globPath string
 
@@ -22,7 +21,7 @@ func GetAllFiles(dir string, ext string) ([]string, string, error) {
 	CheckError(err)
 	var files []string
 	log.Infof("Finding files in %q directory", dir)
-	files, err = filepath.Glob(globPath)
+	files, err = glob(globPath)
 	CheckError(err)
 
 	if len(files) == 0 {
