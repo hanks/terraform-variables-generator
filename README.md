@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hanks/terraform-variables-generator.svg?branch=master)](https://travis-ci.org/hanks/terraform-variables-generator)
+[![Build Status](https://travis-ci.org/hanks/terraform-variables-generator.svg?branch=master)](https://travis-ci.org/hanks/terraform-variables-generator) [![Coverage Status](https://coveralls.io/repos/github/hanks/terraform-variables-generator/badge.svg)](https://coveralls.io/github/hanks/terraform-variables-generator)
 
 # terraform-variables-generator
 

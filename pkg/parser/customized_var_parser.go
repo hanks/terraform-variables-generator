@@ -18,6 +18,23 @@ type CustVars struct {
 	Vars []map[string]CustVar `yaml:"vars"`
 }
 
+// equal does a simple equal compare between two CustVars structs
+func (c CustVars) equal(other CustVars) bool {
+	if len(c.Vars) != len(other.Vars) {
+		return false
+	}
+
+	for idx, m := range c.Vars {
+		for k := range m {
+			if _, ok := other.Vars[idx][k]; !ok {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
 // ParseCustVars is used to get the content from customized variable config file
 func ParseCustVars(path string) (CustVars, error) {
 	buf, err := ioutil.ReadFile(path)

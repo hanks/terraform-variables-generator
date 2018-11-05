@@ -2,5 +2,5 @@
 *.swp
 .vscode/
 variables.tf
-cover.out
-cover.html
+coverage.out
+coverage.html

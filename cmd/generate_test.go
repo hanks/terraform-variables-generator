@@ -1,8 +1,9 @@
-package main
+package cmd
 
 import (
 	"bufio"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/hanks/terraform-variables-generator/configs"
@@ -19,7 +20,7 @@ func TestContainsElement(t *testing.T) {
 }
 
 func TestGetAllFiles(t *testing.T) {
-	files, _, err := util.GetAllFiles("", config.TFFileExt)
+	files, _, err := util.GetAllFiles(filepath.Glob, "", config.TFFileExt)
 	util.CheckError(err)
 	if len(files) == 0 {
 		t.Error("Should found at least one file")
@@ -30,7 +31,7 @@ func TestMatchVariable(t *testing.T) {
 	ter := &parser.TerraformVars{}
 	var messages []string
 
-	file, _, err := util.GetAllFiles("", config.TFFileExt)
+	file, _, err := util.GetAllFiles(filepath.Glob, "", config.TFFileExt)
 	util.CheckError(err)
 
 	fileHandle, _ := os.Open(file[0])

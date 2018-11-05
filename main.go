@@ -12,7 +12,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-func main() {
+func createApp() *cli.App {
 	app := cli.NewApp()
 
 	app.Name = "terraform-variables-genrator"
@@ -39,6 +39,11 @@ func main() {
 		return nil
 	}
 
+	return app
+}
+
+func main() {
+	app := createApp()
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatal(err)
