@@ -21,29 +21,29 @@ func TestParseCustVars(t *testing.T) {
 			},
 			want: CustVars{
 				Vars: []map[string]CustVar{
-					map[string]CustVar{
-						"public_subnets": CustVar{
+					{
+						"public_subnets": {
 							Type:    "list",
 							Desc:    "subnets for public",
 							Default: `["sub1", "sub2"]`,
 						},
 					},
-					map[string]CustVar{
-						"tags": CustVar{
+					{
+						"tags": {
 							Type: "map",
 							Default: `{
 								Name = "Terraform"
 							}`,
 						},
 					},
-					map[string]CustVar{
-						"cidrs": CustVar{
+					{
+						"cidrs": {
 							Type:    "list",
 							Default: `["10.0.0.0/16", "10.1.0.0/16"]`,
 						},
 					},
-					map[string]CustVar{
-						"t1-var2": CustVar{
+					{
+						"t1-var2": {
 							Desc: "var for t1",
 							Type: "string",
 						},
@@ -100,8 +100,8 @@ func TestCustVars_equal(t *testing.T) {
 			name: "CustVars is equal",
 			fields: fields{
 				Vars: []map[string]CustVar{
-					map[string]CustVar{
-						"public_subnets": CustVar{
+					{
+						"public_subnets": {
 							Type:    "list",
 							Desc:    "subnets for public",
 							Default: `["sub1", "sub2"]`,
@@ -112,8 +112,8 @@ func TestCustVars_equal(t *testing.T) {
 			args: args{
 				other: CustVars{
 					Vars: []map[string]CustVar{
-						map[string]CustVar{
-							"public_subnets": CustVar{
+						{
+							"public_subnets": {
 								Type:    "list",
 								Desc:    "subnets for public",
 								Default: `["sub1", "sub2"]`,
@@ -132,8 +132,8 @@ func TestCustVars_equal(t *testing.T) {
 			args: args{
 				other: CustVars{
 					Vars: []map[string]CustVar{
-						map[string]CustVar{
-							"public_subnets": CustVar{
+						{
+							"public_subnets": {
 								Type:    "list",
 								Desc:    "subnets for public",
 								Default: `["sub1", "sub2"]`,
@@ -148,8 +148,8 @@ func TestCustVars_equal(t *testing.T) {
 			name: "CustVars keys is not equal",
 			fields: fields{
 				Vars: []map[string]CustVar{
-					map[string]CustVar{
-						"public_subnets": CustVar{
+					{
+						"public_subnets": {
 							Type:    "list",
 							Desc:    "subnets for public",
 							Default: `["sub1", "sub2"]`,
@@ -160,8 +160,8 @@ func TestCustVars_equal(t *testing.T) {
 			args: args{
 				other: CustVars{
 					Vars: []map[string]CustVar{
-						map[string]CustVar{
-							"hello": CustVar{
+						{
+							"hello": {
 								Type:    "list",
 								Default: `["sub1", "sub2"]`,
 							},

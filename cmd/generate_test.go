@@ -13,7 +13,7 @@ import (
 
 func TestContainsElement(t *testing.T) {
 	ter := &parser.TerraformVars{}
-	testSlice := []parser.TFVar{parser.TFVar{Name: "Terraform"}, parser.TFVar{Name: "Puppet"}, parser.TFVar{Name: "Ansible"}}
+	testSlice := []parser.TFVar{{Name: "Terraform"}, {Name: "Puppet"}, {Name: "Ansible"}}
 	if ter.ContainsElement(testSlice, "Chef") {
 		t.Error("Should return false, but return true")
 	}

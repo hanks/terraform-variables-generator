@@ -87,6 +87,7 @@ func output(t *parser.TerraformVars, dirPath string) {
 	b, err := ioutil.ReadFile(destPath)
 	util.CheckError(err)
 	res, err := printer.Format(b)
+	util.CheckError(err)
 	err = ioutil.WriteFile(destPath, res, 0644)
 	util.CheckError(err)
 

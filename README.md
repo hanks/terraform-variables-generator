@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hanks/terraform-variables-generator.svg?branch=master)](https://travis-ci.org/hanks/terraform-variables-generator) [![Coverage Status](https://coveralls.io/repos/github/hanks/terraform-variables-generator/badge.svg?branch=HEAD)](https://coveralls.io/github/hanks/terraform-variables-generator?branch=master)
+[![Go Report](https://goreportcard.com/badge/github.com/hanks/terraform-variables-generator)](https://goreportcard.com/report/github.com/hanks/terraform-variables-generator) [![Build Status](https://travis-ci.org/hanks/terraform-variables-generator.svg?branch=master)](https://travis-ci.org/hanks/terraform-variables-generator) [![Coverage Status](https://coveralls.io/repos/github/hanks/terraform-variables-generator/badge.svg?branch=HEAD)](https://coveralls.io/github/hanks/terraform-variables-generator?branch=HEAD)
 
 # terraform-variables-generator
 
